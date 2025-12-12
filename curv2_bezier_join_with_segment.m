@@ -25,8 +25,10 @@ switch case_min
 
 end
 % Determina il numero di tratti per pp1 e pp2
-num_tratti1 = length(pp1.ab) - 1;
-num_tratti2 = length(pp2.ab) - 1;
+n1 = length(pp1.ab);
+n2 = length(pp2.ab);
+num_tratti1 = n1 - 1;
+num_tratti2 = n2 - 1;
 if (length(pp1.deg)==1)
     pp1.deg=pp1.deg*ones(1,num_tratti1);
 end
@@ -35,7 +37,7 @@ if (length(pp2.deg)==1)
 end
 line_cp = [pp1.cp(ncp1,:); pp2.cp(1,:)];  % Segmento tra ultimo punto di pp1 e primo di pp2
 mdppbez.deg = [pp1.deg, 1, pp2.deg];  % Aggiungi il segmento lineare (grado 1)
-mdppbez.ab = [pp1.ab, pp1.ab(2)+1, pp1.ab(2)+1+pp2.ab(2)-pp2.ab(1)];   % Aggiungi i nodi della nuova curva
+mdppbez.ab = [pp1.ab, pp1.ab(n1)+1, pp1.ab(n1)+1+pp2.ab(2:n2)-pp2.ab(1)];   % Aggiungi i nodi della nuova curva
 mdppbez.cp = [pp1.cp; line_cp(2, :); pp2.cp(2:end,:)];
 
 end
